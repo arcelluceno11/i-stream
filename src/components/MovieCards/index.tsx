@@ -6,8 +6,7 @@ import 'swiper/css/effect-cards'
 import { EffectCards } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import './index.css'
-import { IonButton, IonImg, IonLoading, IonText } from '@ionic/react'
+import { IonButton, IonContent, IonImg, IonLoading, IonText } from '@ionic/react'
 import { Movie } from '../../services/moviesAPI'
 
 type Props = {
@@ -24,16 +23,17 @@ const MovieCards = ({ movies }: Props) => {
   if (!movies) return <IonLoading isOpen={true} />
 
   return (
-    <div className='ion-padding h-96'>
+    <div className='ion-padding flex flex-col'>
       <Swiper
         effect='cards'
         autoplay={true}
         modules={[EffectCards]}
         onSlideChange={handleOnSlideChange}
+        className='w-56'
       >
         {movies &&
           movies.map((movie) => (
-            <SwiperSlide key={movie.id}>
+            <SwiperSlide key={movie.id} className='rounded-lg'>
               <IonImg
                 src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
               />

@@ -8,6 +8,14 @@ export interface Movie {
   vote_average: string
 }
 
+export interface TVSeries {
+  id: string
+  name: string
+  poster_path: string
+  original_language: string
+  vote_average: string
+}
+
 const options = {
   method: 'GET',
   headers: {
@@ -24,3 +32,32 @@ export const getPopularMovies = async () => {
 
   return res.json()
 }
+
+export const getTrendingMovies = async () => {
+  const res = await fetch(
+    `${import.meta.env.VITE_MOVIE_URL}/now_playing?language=en-US&page=1`,
+    options
+  )
+
+  return res.json()
+}
+
+export const getTopRatedMovies = async () => {
+  const res = await fetch(
+    `${import.meta.env.VITE_MOVIE_URL}/top_rated?language=en-US&page=1`,
+    options
+  )
+
+  return res.json()
+}
+
+export const getTVSeries = async () => {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/trending/tv/day?language=en-US`,
+    options
+  )
+
+  return res.json()
+}
+
+

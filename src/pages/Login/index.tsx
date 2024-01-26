@@ -66,6 +66,7 @@ const Login: React.FC = (props: Props) => {
               expand='block'
               onClick={handleFacebookLogin}
               color='primary'
+              disabled
             >
               <IonIcon
                 slot='start'
