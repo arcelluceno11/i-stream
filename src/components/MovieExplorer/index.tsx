@@ -29,9 +29,8 @@ const MovieExplorer = ({ movies, page, setPage, handleFetch }: Props) => {
   return (
     <div className='flex h-full flex-wrap'>
       {movies.map((movie) => (
-        <div className='p-1 w-1/3 h-1/4'>
+        <div key={movie.id} className='p-1 w-1/3 h-1/4'>
           <IonImg
-            key={movie.id}
             className='w-full h-full rounded-2xl'
             src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
           />
