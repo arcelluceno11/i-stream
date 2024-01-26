@@ -27,7 +27,7 @@ const MovieSwiper = ({ title, movies, handleViewAllClick }: Props) => {
       </div>
       <div className='pt-2'>
         <Swiper
-          spaceBetween={8.5}
+          spaceBetween={7.5}
           slidesPerView={3.5}
           className='w-full'
           onSlideChange={() => console.log('slide change')}

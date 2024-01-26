@@ -32,13 +32,12 @@ const App: React.FC = () => (
       <Redirect exact path='/' to='/home' />
       <IonRouterOutlet>
         <Route path='/login' render={() => <Login />} exact />
-        <Route path='/home' render={() => <Main />} exact />
-        {/* <PrivateRoute
+        <PrivateRoute
           path='/home'
           render={() => <Main />}
           loginPath='/login'
           exact
-        /> */}
+        />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

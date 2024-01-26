@@ -23,10 +23,12 @@ const Header = ({ title }: Props) => {
     <>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>{title}</IonTitle>
+          <IonTitle>
+            <h1 className='text-2xl font-mono font-medium'>{title}</h1>
+          </IonTitle>
           <IonButtons slot='secondary'>
             <IonButton onClick={handleShowModal}>
-              <IonIcon slot='icon-only' icon={search}></IonIcon>
+              <IonIcon slot='icon-only' color='primary' icon={search}></IonIcon>
             </IonButton>
           </IonButtons>
         </IonToolbar>

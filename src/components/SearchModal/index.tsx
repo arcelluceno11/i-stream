@@ -52,7 +52,7 @@ const SearchModal = ({ showModal, handleShowModal }: Props) => {
   return (
     <IonModal isOpen={showModal}>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar color='primary'>
           <IonSearchbar
             showCancelButton='always'
             onIonCancel={handleShowModal}
