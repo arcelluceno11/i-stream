@@ -4,12 +4,14 @@ import { useIsAuthenticated, useSignIn } from 'react-auth-kit'
 import { Redirect } from 'react-router'
 import { logoFacebook, logoGoogle } from 'ionicons/icons'
 import { Capacitor, Plugins } from '@capacitor/core'
-import { GoogleAuthService } from '../../services/auth'
+import { FacebookAuthService, GoogleAuthService } from '../../services/auth'
 
 type Props = {}
 
 const Login: React.FC = (props: Props) => {
   const googleAuth = new GoogleAuthService()
+  const facebookAuth = new FacebookAuthService()
+
   const isAuthenticated = useIsAuthenticated()
   const signIn = useSignIn()
 
@@ -23,7 +25,16 @@ const Login: React.FC = (props: Props) => {
     })
   }
 
-  const handleFacebookLogin = () => {}
+  const handleFacebookLogin = () => {
+    facebookAuth.signIn().then((result) => {
+      console.log(JSON.stringify(result))
+      signIn({
+        token: result.accessToken?.token || '',
+        tokenType: 'Bearer',
+        expiresIn: 120,
+      })
+    })
+  }
 
   const handleExit = () => {
     if (Capacitor.isNativePlatform()) {

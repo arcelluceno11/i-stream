@@ -1,21 +1,37 @@
-import { GoogleAuth } from "@codetrix-studio/capacitor-google-auth";
+import { FacebookLogin } from '@capacitor-community/facebook-login'
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
 
 export class GoogleAuthService {
-    constructor() {
-        GoogleAuth.initialize();
-    }
+  constructor() {
+    GoogleAuth.initialize()
+  }
 
-    async signIn() {
-        const googleUser = await GoogleAuth.signIn();
-        return googleUser;
-    }
+  async signIn() {
+    const googleUser = await GoogleAuth.signIn()
+    return googleUser
+  }
 
-    async signOut() {
-        await GoogleAuth.signOut();
-    }
+  async signOut() {
+    await GoogleAuth.signOut()
+  }
 
-    async refresh() {
-        const googleUser = await GoogleAuth.refresh();
-        return googleUser;
-    }
+  async refresh() {
+    const googleUser = await GoogleAuth.refresh()
+    return googleUser
+  }
+}
+
+export class FacebookAuthService {
+  constructor() {
+    FacebookLogin.initialize({ appId: '356164533872177' })
+  }
+
+  async signIn() {
+    const facebookUser = await FacebookLogin.login({ permissions: ['email'] })
+    return facebookUser
+  }
+
+  async signOut() {
+    await FacebookLogin.logout()
+  }
 }
