@@ -33,9 +33,9 @@ export const getPopularMovies = async () => {
   return res.json()
 }
 
-export const getTrendingMovies = async () => {
+export const getTrendingMovies = async (page: number) => {
   const res = await fetch(
-    `${import.meta.env.VITE_MOVIE_URL}/now_playing?language=en-US&page=1`,
+    `${import.meta.env.VITE_MOVIE_URL}/now_playing?language=en-US&page=${page}`,
     options
   )
 
@@ -51,13 +51,11 @@ export const getTopRatedMovies = async () => {
   return res.json()
 }
 
-export const getTVSeries = async () => {
+export const getTVSeries = async (page: number) => {
   const res = await fetch(
-    `https://api.themoviedb.org/3/trending/tv/day?language=en-US`,
+    `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${page}`,
     options
   )
 
   return res.json()
 }
-
-

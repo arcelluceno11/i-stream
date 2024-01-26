@@ -7,22 +7,23 @@ import { Movie, TVSeries } from '../../services/moviesAPI'
 type Props = {
   title: string
   movies: Movie[] | TVSeries[]
+  handleViewAllClick?: () => void
 }
 
-const MovieSwiper = ({ title, movies }: Props) => {
+const MovieSwiper = ({ title, movies, handleViewAllClick }: Props) => {
   return (
     <div className='pt-2 flex flex-col'>
       <div className='flex justify-between items-center'>
         <IonText className='text-md font-mono font-medium'>{title}</IonText>
-        <div className='ion-activatable ripple-parent'>
-          <IonText
-            className='text-md font-mono font-extralight'
-            color='primary'
-          >
-            View All
-          </IonText>
-          <IonRippleEffect />
-        </div>
+        <IonButton
+          fill='clear'
+          size='small'
+          className='text-md font-mono font-extralight'
+          color='primary'
+          onClick={handleViewAllClick}
+        >
+          View All
+        </IonButton>
       </div>
       <div className='pt-2'>
         <Swiper
@@ -34,10 +35,15 @@ const MovieSwiper = ({ title, movies }: Props) => {
         >
           {movies &&
             movies.map((movie) => (
-              <SwiperSlide className='ion-activatable ripple-parent rounded-2xl'>
-                <IonImg src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} />
+              <SwiperSlide
+                key={movie.id}
+                className='ion-activatable ripple-parent rounded-2xl'
+              >
+                <IonImg
+                  src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                />
                 <div className='text-xs font-mono font-extralight'>
-                {(movie as Movie).title || (movie as TVSeries).name}
+                  {(movie as Movie).title || (movie as TVSeries).name}
                 </div>
                 <IonRippleEffect />
               </SwiperSlide>

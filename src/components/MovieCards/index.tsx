@@ -6,8 +6,16 @@ import 'swiper/css/effect-cards'
 import { EffectCards } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import { IonButton, IonContent, IonImg, IonLoading, IonText } from '@ionic/react'
+import {
+  IonButton,
+  IonContent,
+  IonIcon,
+  IonImg,
+  IonLoading,
+  IonText,
+} from '@ionic/react'
 import { Movie } from '../../services/moviesAPI'
+import { play } from 'ionicons/icons'
 
 type Props = {
   movies: Movie[]
@@ -58,6 +66,7 @@ const MovieCards = ({ movies }: Props) => {
           <strong>{movies && movies[activeIndex]?.vote_average}</strong>
         </div>
         <IonButton fill='solid' size='large'>
+          <IonIcon slot='start' icon={play}></IonIcon>
           Watch Now
         </IonButton>
         <div className='flex flex-col justify-center items-center'>
