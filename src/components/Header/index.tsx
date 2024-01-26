@@ -10,9 +10,11 @@ import { search } from 'ionicons/icons'
 import React, { useState } from 'react'
 import SearchModal from '../SearchModal'
 
-type Props = {}
+type Props = {
+  title: string
+}
 
-const Header: React.FC = (props: Props) => {
+const Header = ({ title }: Props) => {
   const [showModal, setShowModal] = useState<boolean>(false)
 
   const handleShowModal = () => setShowModal(!showModal)
@@ -21,9 +23,7 @@ const Header: React.FC = (props: Props) => {
     <>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>
-            iStream
-            </IonTitle>
+          <IonTitle>{title}</IonTitle>
           <IonButtons slot='secondary'>
             <IonButton onClick={handleShowModal}>
               <IonIcon slot='icon-only' icon={search}></IonIcon>

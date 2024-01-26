@@ -30,10 +30,9 @@ interface TabsCustomEvent extends CustomEvent {
 type Props = {}
 
 const Main: React.FC = (props: Props) => {
-  const [isMoreSelected, setIsMoreSelected] = React.useState<boolean>(false)
-
+  const [selectedTab, setSelectedTab] = React.useState<string>()
   const handleOnTabChange = ({ detail }: TabsCustomEvent) => {
-    setIsMoreSelected(detail.tab === 'more')
+    setSelectedTab(detail.tab)
   }
 
   return (
@@ -41,7 +40,17 @@ const Main: React.FC = (props: Props) => {
       <IonTabs onIonTabsDidChange={handleOnTabChange}>
         <IonRouterOutlet>
           <IonPage>
-            {!isMoreSelected && <Header />}
+            {selectedTab !== 'more' && (
+              <Header
+                title={
+                  selectedTab === 'home'
+                    ? 'isStream'
+                    : selectedTab === 'movies'
+                    ? 'Movies'
+                    : 'TV Series'
+                }
+              />
+            )}
             <Route path='/home' render={() => <Home />} exact />
             <Route path='/movies' render={() => <Movies />} exact />
             <Route path='/tvseries' render={() => <TVSeries />} exact />
