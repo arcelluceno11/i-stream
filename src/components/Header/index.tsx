@@ -3,16 +3,12 @@ import {
   IonButtons,
   IonHeader,
   IonIcon,
-  IonModal,
-  IonSearchbar,
   IonTitle,
-  IonToggle,
   IonToolbar,
 } from '@ionic/react'
 import { search } from 'ionicons/icons'
 import React, { useState } from 'react'
-import SearchModal from './SearchModal'
-import { useHistory } from 'react-router'
+import SearchModal from '../SearchModal'
 
 type Props = {}
 
@@ -25,7 +21,9 @@ const Header: React.FC = (props: Props) => {
     <>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>iStream</IonTitle>
+          <IonTitle>
+            iStream
+            </IonTitle>
           <IonButtons slot='secondary'>
             <IonButton onClick={handleShowModal}>
               <IonIcon slot='icon-only' icon={search}></IonIcon>
