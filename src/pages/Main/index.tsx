@@ -1,6 +1,7 @@
 import {
   IonIcon,
   IonLabel,
+  IonPage,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -14,23 +15,38 @@ import {
   videocam,
 } from 'ionicons/icons'
 import React from 'react'
-import { Redirect, Route } from 'react-router'
+import { Route } from 'react-router'
 import Home from './Home'
 import Movies from './Movies'
 import TVSeries from './TVSeries'
 import More from '../More'
+import Header from '../../components/Header'
+
+interface TabsCustomEvent extends CustomEvent {
+  detail: { tab: string }
+  target: HTMLIonTabsElement
+}
 
 type Props = {}
 
 const Main: React.FC = (props: Props) => {
+  const [isMoreSelected, setIsMoreSelected] = React.useState<boolean>(false)
+
+  const handleOnTabChange = ({ detail }: TabsCustomEvent) => {
+    setIsMoreSelected(detail.tab === 'more')
+  }
+
   return (
     <IonReactRouter>
-      <IonTabs>
+      <IonTabs onIonTabsDidChange={handleOnTabChange}>
         <IonRouterOutlet>
-          <Route path='/home' render={() => <Home />} exact={true} />
-          <Route path='/movies' render={() => <Movies />} exact={true} />
-          <Route path='/tvseries' render={() => <TVSeries />} exact={true} />
-          <Route path='/more' render={() => <More />} exact={true} />
+          <IonPage>
+            {!isMoreSelected && <Header />}
+            <Route path='/home' render={() => <Home />} exact />
+            <Route path='/movies' render={() => <Movies />} exact />
+            <Route path='/tvseries' render={() => <TVSeries />} exact />
+            <Route path='/more' render={() => <More />} exact />
+          </IonPage>
         </IonRouterOutlet>
         <IonTabBar slot='bottom'>
           <IonTabButton tab='home' href='/home'>
