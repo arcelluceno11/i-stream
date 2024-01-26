@@ -1,0 +1,8 @@
+{
+  "name": "iStream",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite",
+  "id": "281e1c63"
+}
