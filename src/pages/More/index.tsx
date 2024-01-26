@@ -13,6 +13,8 @@ import {
 import React from 'react'
 import { FacebookAuthService, GoogleAuthService } from '../../services/auth'
 import { useSignOut } from 'react-auth-kit'
+import { useSelector } from 'react-redux'
+import { useAppSelector } from '../../store'
 
 type Props = {}
 
@@ -21,12 +23,14 @@ const More: React.FC = (props: Props) => {
   const facebookAuth = new FacebookAuthService()
   const signOut = useSignOut()
 
+  const { imageUrl, email, name } = useAppSelector((state) => state.googleAuth.user)
+
   const handleSignOut = () => {
     googleAuth.signOut()
     facebookAuth.signOut()
     signOut()
   }
-
+  
   return (
     <>
       <IonHeader>
@@ -42,21 +46,17 @@ const More: React.FC = (props: Props) => {
             <div className='h-1/5 flex'>
               <div className='w-2/3 ion-padding'>
                 <IonText color='primary'>
-                  <h1 className='text-2xl font-mono font-medium '>
-                    Arcel Luceno
-                  </h1>
+                  <h1 className='text-2xl font-mono font-medium '>{name}</h1>
                 </IonText>
                 <IonText>
-                  <h1 className='text-xl font-mono font-medium '>
-                    Arcel Luceno
-                  </h1>
+                  <h1 className='text-xl font-mono font-medium '>{email}</h1>
                 </IonText>
               </div>
               <div className='w-1/3 h-full flex justify-center items-center'>
-                <IonAvatar >
+                <IonAvatar>
                   <img
                     alt="Silhouette of a person's head"
-                    src='https://ionicframework.com/docs/img/demos/avatar.svg'
+                    src={imageUrl}
                   />
                 </IonAvatar>
               </div>

@@ -6,6 +6,9 @@ import { logoFacebook, logoGoogle } from 'ionicons/icons'
 import { Capacitor, Plugins } from '@capacitor/core'
 import { FacebookAuthService, GoogleAuthService } from '../../services/auth'
 import BackDrop from '../../components/BackDrop'
+import { useDispatch } from 'react-redux'
+import { saveUser } from '../../redux/authSlice'
+import { useAppDispatch, useAppSelector } from '../../store'
 
 type Props = {}
 
@@ -16,6 +19,9 @@ const Login: React.FC = (props: Props) => {
   const isAuthenticated = useIsAuthenticated()
   const signIn = useSignIn()
 
+  const dispatch = useAppDispatch()
+  const e = useAppSelector((state) => state.googleAuth)
+
   const handleGoogleLogin = () => {
     googleAuth.signIn().then((result) => {
       signIn({
@@ -23,12 +29,12 @@ const Login: React.FC = (props: Props) => {
         tokenType: 'Bearer',
         expiresIn: 120,
       })
+      dispatch(saveUser(result))
     })
   }
 
   const handleFacebookLogin = () => {
     facebookAuth.signIn().then((result) => {
-      console.log(JSON.stringify(result))
       signIn({
         token: result.accessToken?.token || '',
         tokenType: 'Bearer',

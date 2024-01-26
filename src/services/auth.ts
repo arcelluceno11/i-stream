@@ -1,13 +1,15 @@
 import { FacebookLogin } from '@capacitor-community/facebook-login'
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth'
+import { GoogleAuth, User } from '@codetrix-studio/capacitor-google-auth'
 
 export class GoogleAuthService {
   constructor() {
     GoogleAuth.initialize()
   }
 
-  async signIn() {
+  async signIn(): Promise<User> {
     const googleUser = await GoogleAuth.signIn()
+
+    
     return googleUser
   }
 

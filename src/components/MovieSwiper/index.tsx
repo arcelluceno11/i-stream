@@ -26,13 +26,7 @@ const MovieSwiper = ({ title, movies, handleViewAllClick }: Props) => {
         </IonButton>
       </div>
       <div className='pt-2'>
-        <Swiper
-          spaceBetween={7.5}
-          slidesPerView={3.5}
-          className='w-full'
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
-        >
+        <Swiper spaceBetween={7.5} slidesPerView={3.5} className='w-full'>
           {movies &&
             movies.map((movie) => (
               <SwiperSlide
