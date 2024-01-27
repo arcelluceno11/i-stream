@@ -121,7 +121,7 @@ const MovieModal = ({ movieId, showModal, handleShowModal }: Props) => {
               Overview
             </IonText>
             <IonText className='font-mono text-white font-medium text-xl'>
-              {movie?.overview.slice(0, 400)}
+              {movie?.overview?.slice(0, 400)}
             </IonText>
           </div>
         </div>
