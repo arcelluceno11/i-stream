@@ -8,9 +8,10 @@ type Props = {
   title: string
   movies: Movie[] | TVSeries[]
   handleViewAllClick?: () => void
+  handleOnClick: (movieId: number) => void
 }
 
-const MovieSwiper = ({ title, movies, handleViewAllClick }: Props) => {
+const MovieSwiper = ({ title, movies, handleViewAllClick, handleOnClick }: Props) => {
   return (
     <div className='pt-2 flex flex-col'>
       <div className='flex justify-between items-center'>
@@ -32,6 +33,7 @@ const MovieSwiper = ({ title, movies, handleViewAllClick }: Props) => {
               <SwiperSlide
                 key={movie.id}
                 className='ion-activatable ripple-parent rounded-2xl'
+                onClick={() => handleOnClick(Number(movie.id))}
               >
                 <IonImg
                   src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}

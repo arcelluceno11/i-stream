@@ -5,6 +5,7 @@ import {
 } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { Movie, TVSeries, getTrendingMovies } from '../../services/moviesAPI'
+import MovieModal from '../MovieModal'
 
 type Props = {
   movies: Movie[] | TVSeries[]
@@ -14,12 +15,24 @@ type Props = {
 }
 
 const MovieExplorer = ({ movies, page, setPage, handleFetch }: Props) => {
+  const [showModal, setShowModal] = useState(false)
+  const [movieId, setMovieId] = useState<number>()
+
   const handleOnInfiniteScroll = (ev: any) => {
     handleFetch()
     setTimeout(() => {
       setPage(page + 1)
       ev.target.complete()
     }, 1500)
+  }
+
+  const handleShowModal = () => {
+    setShowModal(!showModal)
+  }
+
+  const handleOnClick = (movieId: number) => {
+    setMovieId(movieId)
+    setShowModal(true)
   }
 
   useEffect(() => {
@@ -33,12 +46,18 @@ const MovieExplorer = ({ movies, page, setPage, handleFetch }: Props) => {
           <IonImg
             className='w-full h-full rounded-2xl'
             src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+            onClick={() => handleOnClick(Number(movie.id))}
           />
         </div>
       ))}
       <IonInfiniteScroll onIonInfinite={handleOnInfiniteScroll}>
         <IonInfiniteScrollContent />
       </IonInfiniteScroll>
+      <MovieModal
+        movieId={movieId}
+        showModal={showModal}
+        handleShowModal={handleShowModal}
+      />
     </div>
   )
 }

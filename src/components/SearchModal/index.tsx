@@ -18,6 +18,7 @@ import {
   searchTVSeries,
 } from '../../services/moviesAPI'
 import { useHistory } from 'react-router'
+import MovieModal from '../MovieModal'
 
 type Props = {
   showModal: boolean
@@ -26,6 +27,9 @@ type Props = {
 
 const SearchModal = ({ showModal, handleShowModal }: Props) => {
   const { location } = useHistory()
+
+  const [isShowMovieModal, setShowMovieModal] = useState(false)
+  const [movieId, setMovieId] = useState<number>()
 
   const [movies, setMovies] = useState<Movie[] | TVSeries[]>([])
 
@@ -43,6 +47,15 @@ const SearchModal = ({ showModal, handleShowModal }: Props) => {
         setMovies(results)
       })
     }
+  }
+
+  const handleShowMovieModal = () => {
+    setShowMovieModal(!showModal)
+  }
+
+  const handleOnClick = (movieId: number) => {
+    setMovieId(movieId)
+    setShowMovieModal(true)
   }
 
   useEffect(() => {
@@ -69,7 +82,7 @@ const SearchModal = ({ showModal, handleShowModal }: Props) => {
               </IonListHeader>
             )}
             {movies.map((movie) => (
-              <IonItem key={movie.id} className='p-2 w-full'>
+              <IonItem key={movie.id} className='p-2 w-full' onClick={() => handleOnClick(Number(movie.id))}>
                 <IonImg
                   className='w-2/5'
                   src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
@@ -82,6 +95,11 @@ const SearchModal = ({ showModal, handleShowModal }: Props) => {
           </IonList>
         </div>
       </IonContent>
+      <MovieModal
+        movieId={movieId}
+        showModal={isShowMovieModal}
+        handleShowModal={handleShowMovieModal}
+      />
     </IonModal>
   )
 }

@@ -19,13 +19,18 @@ import { play } from 'ionicons/icons'
 
 type Props = {
   movies: Movie[]
+  handleOnClick: (movieId: number) => void
 }
 
-const MovieCards = ({ movies }: Props) => {
+const MovieCards = ({ movies, handleOnClick }: Props) => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
 
   const handleOnSlideChange = (e: any) => {
     setActiveIndex(e.activeIndex)
+  }
+
+  const handleOnPlayClick = () => {
+    handleOnClick(Number(movies[activeIndex].id))
   }
 
   if (!movies) return <IonLoading isOpen={true} />
@@ -65,9 +70,9 @@ const MovieCards = ({ movies }: Props) => {
           <IonText color='dark'>Rating</IonText>
           <strong>{movies && movies[activeIndex]?.vote_average}</strong>
         </div>
-        <IonButton fill='solid' size='large'>
+        <IonButton fill='solid' size='large' onClick={handleOnPlayClick}>
           <IonIcon slot='start' icon={play}></IonIcon>
-          Watch Now
+          Play Now
         </IonButton>
         <div className='flex flex-col justify-center items-center'>
           <IonText color='dark'>Lang</IonText>

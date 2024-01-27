@@ -1,3 +1,8 @@
+interface Genre {
+  id: number
+  name: string
+}
+
 export interface Movie {
   id: string
   title: string
@@ -6,6 +11,9 @@ export interface Movie {
   release_date: string
   original_language: string
   vote_average: string
+  backdrop_path: string
+  genres: Genre[]
+  status: string
 }
 
 export interface TVSeries {
@@ -82,6 +90,15 @@ export const searchTVSeries = async (query: string) => {
 export const searchMovies = async (query: string) => {
   const res = await fetch(
     `${import.meta.env.VITE_MOVIE_URL}/search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
+    options
+  )
+
+  return res.json()
+}
+
+export const getMovieDetails = async (id: number | undefined) => {
+  const res = await fetch(
+    `${import.meta.env.VITE_MOVIE_URL}/movie/${id}?language=en-US`,
     options
   )
 
