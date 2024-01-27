@@ -1,20 +1,15 @@
 import {
   IonAvatar,
   IonButton,
-  IonButtons,
   IonContent,
   IonHeader,
-  IonIcon,
-  IonImg,
   IonText,
   IonTitle,
   IonToolbar,
 } from '@ionic/react'
 import React from 'react'
 import { FacebookAuthService, GoogleAuthService } from '../../services/auth'
-import { useSignOut } from 'react-auth-kit'
-import { useSelector } from 'react-redux'
-import { useAppSelector } from '../../store'
+import { useAuthUser, useSignOut } from 'react-auth-kit'
 
 type Props = {}
 
@@ -22,8 +17,7 @@ const More: React.FC = (props: Props) => {
   const googleAuth = new GoogleAuthService()
   const facebookAuth = new FacebookAuthService()
   const signOut = useSignOut()
-
-  const { imageUrl, email, name } = useAppSelector((state) => state.googleAuth.user)
+  const auth = useAuthUser()
 
   const handleSignOut = () => {
     googleAuth.signOut()
@@ -46,17 +40,17 @@ const More: React.FC = (props: Props) => {
             <div className='h-1/5 flex'>
               <div className='w-2/3 ion-padding'>
                 <IonText color='primary'>
-                  <h1 className='text-2xl font-mono font-medium '>{name}</h1>
+                  <h1 className='text-2xl font-mono font-medium '>{auth()?.name}</h1>
                 </IonText>
                 <IonText>
-                  <h1 className='text-xl font-mono font-medium '>{email}</h1>
+                  <h1 className='text-xl font-mono font-medium '>{auth()?.email}</h1>
                 </IonText>
               </div>
               <div className='w-1/3 h-full flex justify-center items-center'>
                 <IonAvatar>
                   <img
                     alt="Silhouette of a person's head"
-                    src={imageUrl}
+                    src={auth()?.imageUrl}
                   />
                 </IonAvatar>
               </div>

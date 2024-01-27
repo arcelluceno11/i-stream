@@ -1,14 +1,11 @@
 import { IonButton, IonIcon, IonText } from '@ionic/react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useIsAuthenticated, useSignIn } from 'react-auth-kit'
 import { Redirect } from 'react-router'
 import { logoFacebook, logoGoogle } from 'ionicons/icons'
 import { Capacitor, Plugins } from '@capacitor/core'
 import { FacebookAuthService, GoogleAuthService } from '../../services/auth'
 import BackDrop from '../../components/BackDrop'
-import { useDispatch } from 'react-redux'
-import { saveUser } from '../../redux/authSlice'
-import { useAppDispatch, useAppSelector } from '../../store'
 
 type Props = {}
 
@@ -19,17 +16,14 @@ const Login: React.FC = (props: Props) => {
   const isAuthenticated = useIsAuthenticated()
   const signIn = useSignIn()
 
-  const dispatch = useAppDispatch()
-  const e = useAppSelector((state) => state.googleAuth)
-
   const handleGoogleLogin = () => {
     googleAuth.signIn().then((result) => {
       signIn({
         token: result.authentication.accessToken,
         tokenType: 'Bearer',
         expiresIn: 120,
+        authState: result,
       })
-      dispatch(saveUser(result))
     })
   }
 

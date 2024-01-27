@@ -44,7 +44,7 @@ const Main: React.FC = (props: Props) => {
               <Header
                 title={
                   selectedTab === 'home'
-                    ? 'isStream'
+                    ? 'iStream'
                     : selectedTab === 'movies'
                     ? 'Movies'
                     : 'TV Series'
