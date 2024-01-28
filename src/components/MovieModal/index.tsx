@@ -68,16 +68,16 @@ const MovieModal = ({ movieId, showModal, handleShowModal }: Props) => {
                   />
                 </div>
                 <div className='ion-padding h-full w-2/3'>
-                  <IonText className='font-mono text-white font-medium text-2xl'>
+                  <IonText color='dark' className='font-mono font-medium text-2xl'>
                     {movie?.title}
                   </IonText>
                   <div className='pt-2 flex items-center gap-2'>
                     <IonIcon icon={star} color='primary' />
-                    <IonText className='font-mono text-white font-medium text-xl'>
+                    <IonText color='dark' className='font-mono font-medium text-xl'>
                       {movie?.vote_average}
                     </IonText>
                     <br />
-                    <IonText className='flex flex-wrap font-mono text-white font-medium text-sm'>
+                    <IonText color='dark' className='flex flex-wrap font-mono font-medium text-sm'>
                       {movie?.genres?.map((genre) => genre.name).join(', ')}
                     </IonText>
                   </div>
@@ -100,7 +100,7 @@ const MovieModal = ({ movieId, showModal, handleShowModal }: Props) => {
                 </div>
                 <div className='flex flex-col w-1/2 h-full'>
                   <div className='flex items-center justify-center h-full w-full'>
-                    <IonText className='font-mono text-white font-medium text-xl'>
+                    <IonText color='dark' className='font-mono font-medium text-xl'>
                       {movie?.release_date}
                     </IonText>
                   </div>
@@ -119,7 +119,7 @@ const MovieModal = ({ movieId, showModal, handleShowModal }: Props) => {
                 </div>
                 <div className='flex flex-col w-1/2 h-full'>
                   <div className='flex items-center justify-center h-full w-full'>
-                    <IonText className='font-mono text-white font-medium text-xl'>
+                    <IonText color='dark' className='font-mono font-medium text-xl'>
                       {movie?.status}
                     </IonText>
                   </div>
@@ -131,7 +131,7 @@ const MovieModal = ({ movieId, showModal, handleShowModal }: Props) => {
             <IonText className='font-mono font-medium text-4xl' color='primary'>
               Overview
             </IonText>
-            <IonText className='font-mono text-white font-medium text-xl'>
+            <IonText color='dark' className='font-mono font-medium text-xl'>
               {movie?.overview?.slice(0, 400)}
             </IonText>
           </div>
