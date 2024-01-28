@@ -19,6 +19,8 @@ import {
 } from '../../services/moviesAPI'
 import { useHistory } from 'react-router'
 import MovieModal from '../MovieModal'
+import { Capacitor } from '@capacitor/core'
+import { App } from '@capacitor/app'
 
 type Props = {
   showModal: boolean
@@ -56,6 +58,16 @@ const SearchModal = ({ showModal, handleShowModal }: Props) => {
   const handleOnClick = (movieId: number) => {
     setMovieId(movieId)
     setShowMovieModal(true)
+    setMovies([])
+  }
+
+  if (Capacitor.isNativePlatform()) {
+    App.addListener('backButton', () => {
+      if (showModal) {
+        handleShowModal()
+        setShowMovieModal(false)
+      }
+    })
   }
 
   useEffect(() => {
@@ -82,7 +94,11 @@ const SearchModal = ({ showModal, handleShowModal }: Props) => {
               </IonListHeader>
             )}
             {movies.map((movie) => (
-              <IonItem key={movie.id} className='p-2 w-full' onClick={() => handleOnClick(Number(movie.id))}>
+              <IonItem
+                key={movie.id}
+                className='p-2 w-full'
+                onClick={() => handleOnClick(Number(movie.id))}
+              >
                 <IonImg
                   className='w-2/5'
                   src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
