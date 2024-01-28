@@ -68,16 +68,16 @@ const MovieModal = ({ movieId, showModal, handleShowModal }: Props) => {
                   />
                 </div>
                 <div className='ion-padding h-full w-2/3'>
-                  <IonText color='dark' className='font-mono font-medium text-2xl'>
+                  <IonText color='light' className='font-mono font-medium text-2xl'>
                     {movie?.title}
                   </IonText>
                   <div className='pt-2 flex items-center gap-2'>
                     <IonIcon icon={star} color='primary' />
-                    <IonText color='dark' className='font-mono font-medium text-xl'>
+                    <IonText color='light' className='font-mono font-medium text-xl'>
                       {movie?.vote_average}
                     </IonText>
                     <br />
-                    <IonText color='dark' className='flex flex-wrap font-mono font-medium text-sm'>
+                    <IonText color='light' className='flex flex-wrap font-mono font-medium text-sm'>
                       {movie?.genres?.map((genre) => genre.name).join(', ')}
                     </IonText>
                   </div>
